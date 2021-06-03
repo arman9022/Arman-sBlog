@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+  Add Category
+{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="row py-5">
+  
+  <div class="text-center col-md-4 offset-md-4">
+    
+      <h1>Add Category</h1>
+      <div class="form-group">
+        <form method="POST">
+          {% csrf_token %}
+          <!-- {{form.as_p}} -->
+          <div class="form-group"><input type="text" class="form-control" placeholder="Write Category" name="name"></div>
+          <button class="btn btn-success px-5">Add</button>
+        </form>
+      </div>
+
+  </div>
+</div>
+{% else %}
+<div class="alert alert-warning alert-dismissible fade show p-5" role="alert">
+  <strong>Please Login First </strong> Otherwise You Don't...!
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+
+{% endblock %}

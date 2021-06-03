@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}
+  Create Profile Page
+{% endblock %}
+{% block content %}
+
+<div class="py-5 text-center">
+  {% if user.is_authenticated %}
+    <h1>Create Profile</h1>
+    <div class="form-group">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} 
+        <!-- {{form.as_p}} -->
+        <div class="form-group row">
+          <div class="col-md-2"><label>Profile Picture : </label></div>
+          <div class="col-md-4 mb-2">
+            <input type="file" class="form-control-file" placeholder="Profile Picyure" name="profile_pic">
+          </div>
+          <div class="col-md-6"><input type="text" class="form-control" placeholder="Bio (Required)" name="bio"></div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-6 mb-2"><input type="text" class="form-control" placeholder="Facebook (Optional)" name="facebook_url"></div>
+          <div class="col-md-6"><input type="text" class="form-control" placeholder="Linkedin (Optional)" name="linkedin_url"></div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-6 mb-2"><input type="text" class="form-control" placeholder="Website (Optional)" name="website_url"></div>
+          <div class="col-md-6"><input type="text" class="form-control" placeholder="Youtube (Optional)" name="youtube_url"></div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-6 mb-2"><input type="text" class="form-control" placeholder="Instagram (Optional)" name="instagram_url"></div>
+          <div class="col-md-6"><input type="text" class="form-control" placeholder="Twitter (Optional)" name="twitter_url"></div>
+        </div>
+
+        <button class="btn btn-success px-5">Done</button>
+      </form>
+    </div>
+  {% else %}
+    Please login
+  {% endif %}
+</div>
+
+{% endblock %}

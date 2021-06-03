@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+  Category
+{% endblock %}
+{% block content %}
+
+<div class="py-5">
+    <h1 class="text-center"> {{cats}} </h1>
+    {% if category_posts %}
+    <div class="row">
+      {% for post in category_posts %}
+        <div class="col-sm-4">
+          <div class="card">
+            <div class="card-body">
+              <a href=" {% url 'article-detail' post.pk %} " class="card-title">{{post.title}}</a> 
+              <small>-{{post.author.first_name}} {{post.author.last_name}}</small>
+              <hr>
+              <p class="card-text">{{ post.body|slice:":100"|safe }}</p>
+              <small> 
+                {% if user.is_authenticated %}
+                  {% if user.id == post.author.id %}
+                  <hr>
+                    <a href=" {% url 'update_post' post.pk %} " class="btn btn-info">Edit</a>
+                    <a href=" {% url 'delete_post' post.pk %} " class="btn btn-danger">Delete</a>
+                  {% endif %}
+                {% endif %}
+              </small>
+            </div>
+          </div><br>
+        </div> 
+        {% endfor %}
+    </div>        
+    {% else %}
+      <div class="alert alert-warning alert-dismissible fade show p-5" role="alert">
+        <strong>No Post Availabe Now </strong> Please wait a moment...!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endif %}
+</div>
+
+{% endblock %}
